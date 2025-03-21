@@ -17,3 +17,10 @@
   padding: 20px;
   flex-grow: 1;
 }
+.product-catalog {
+  width: 100% !important;
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}

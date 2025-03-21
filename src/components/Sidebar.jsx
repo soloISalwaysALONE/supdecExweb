@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaUser, FaShoppingCart, FaSearch, FaTimes } from 'react-icons/fa';
 
-const Sidebar = () => {
+const Sidebar = ({ cart, favorites }) => {
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
 
@@ -47,7 +47,7 @@ const Sidebar = () => {
                   onMouseEnter={() => setActiveCategory(index)}
                   onMouseLeave={() => setActiveCategory(null)}
                 >
-                  {/* Название категории (некликабельно, если активна подкатегория) */}
+                  {/* Название категории */}
                   <button
                     className={`text-lg font-bold text-gray-800 transition-transform duration-200 ${
                       activeCategory === index ? 'pointer-events-none opacity-50' : 'hover:scale-110'
@@ -81,8 +81,10 @@ const Sidebar = () => {
       )}
 
       {/* Боковая панель */}
-      <aside className="fixed left-0 top-0 h-full w-20 bg-gray-800 text-white flex flex-col items-center p-4 space-y-6 z-50">
-        <a href="/" className="text-xl font-bold">SUPDEC</a>
+      <aside className="flex-shrink-0 min-h-screen left-0 top-0 h-full w-20 bg-gray-800 text-white flex flex-col items-center p-4 space-y-6 z-50">
+        <a href="/" className="text-xl font-bold">
+          <img src="/logo.png" alt="SUPDEC Logo" className="w-28 h-10 drop-shadow-lg" />
+        </a>
 
         {/* Контейнер поиска */}
         <div className="relative flex flex-col items-center w-full">
@@ -103,17 +105,21 @@ const Sidebar = () => {
         {/* Личный кабинет */}
         <div className="relative group">
           <FaUser size={24} />
-          <div className="absolute left-full hidden group-hover:block bg-white text-black p-2 shadow-lg">
-            <button className="block">Выход</button>
-          </div>
+          {Object.keys(favorites).length > 0 && (
+            <span className="absolute top-0 right-0 bg-blue-500 text-white text-xs px-1 rounded-full">
+              {Object.keys(favorites).length}
+            </span>
+          )}
         </div>
 
         {/* Корзина */}
         <div className="relative group">
           <FaShoppingCart size={24} />
-          <div className="absolute left-full hidden group-hover:block bg-white text-black p-2 shadow-lg w-48">
-            Корзина пуста
-          </div>
+          {Object.keys(cart).length > 0 && (
+            <span className="absolute top-0 right-0 bg-red-500 text-white text-xs px-1 rounded-full">
+              {Object.values(cart).reduce((a, b) => a + b, 0)}
+            </span>
+          )}
         </div>
       </aside>
     </>
