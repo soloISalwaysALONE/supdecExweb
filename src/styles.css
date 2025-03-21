@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* styles.css */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  height: 100vh;
+  padding: 20px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px;
+  flex-grow: 1;
+}
